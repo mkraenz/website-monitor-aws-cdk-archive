@@ -1,0 +1,10 @@
+POST https://fakefakefake.execute-api.eu-west-1.amazonaws.com/prod/
+Content-Type: application/json
+
+{
+    "email":"test@example.com",
+    "intervalValue": 2, 
+    "intervalUnit": "days",
+    "url":"https://example.com",
+    "watchPhrase":"this text is not on example.com"
+}

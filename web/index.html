@@ -1,0 +1,62 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage Monitor</title>
+</head>
+
+<body>
+    <h1>Webpage Monitor</h1>
+    <h2>Get Alerted On Webpage Changes</h2>
+
+    <p>How it works: Every day we check the webpage for the 'watch phrase' you provide. If the watch phrase (e.g. a
+        last-update timestamp) is found nothing happens. But if the watch phrase is NOT found, that is, the page
+        changed, then you will automatically receive an email.
+
+        NOTE: After subscribing, you need to confirm your email address. Please check your inbox and click the link in
+        the email.
+    </p>
+
+    <form id="form">
+        <label for="input_url">Webpage URL</label><br>
+        <input type="text" id="input_url" name="input_url" value="" placeholder="https://example.com"><br>
+
+        <label for="input_email">Email</label><br>
+        <input type="text" id="input_email" name="input_email" value="" placeholder="myemail@example.com"><br>
+
+        <label for="input_watch_phrase">Watch phrase</label><br>
+        <input type="text" id="input_watch_phrase" name="input_watch_phrase" value=""
+            placeholder="some phrase on the webpage"><br>
+
+        <input type="submit" value="Alert me!">
+    </form>
+
+    <!-- script must come after the form because it's run immediately -->
+    <script>
+        // TODO REPLACE the id
+        const URL = 'https://TODO.execute-api.eu-west-1.amazonaws.com/prod/'
+        const form = document.getElementById("form");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const url = document.getElementById('input_url').value;
+            const email = document.getElementById('input_email').value;
+            const watchPhrase = document.getElementById('input_watch_phrase').value;
+
+            const intervalValue = 1;
+            const intervalUnit = 'day'
+            fetch(URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    url,
+                    intervalValue,
+                    intervalUnit,
+                    email,
+                    watchPhrase
+                })
+            }).then(r => r.json()).then(data => alert(`Success! Please confirm your email. Check your inbox. You can close the page now.`))
+        });</script>
+</body>
+
+</html>
